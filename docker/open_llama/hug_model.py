@@ -6,7 +6,7 @@ import argparse
 
 def make_request(url, params=None):
     print(f"Making request to {url}...")
-    response = requests.get(url, params=params)
+    response = requests.get(url, params=params, timeout=60)
     if response.status_code == 200:
         return json.loads(response.text)
     else:
@@ -28,7 +28,7 @@ def check_magic_and_version(filename):
 
 def download_file(url, destination):
     print(f"Downloading {url} to {destination}...")
-    response = requests.get(url, stream=True)
+    response = requests.get(url, stream=True, timeout=60)
     if response.status_code == 200:
         with open(destination, 'wb') as f:
             total_downloaded = 0
